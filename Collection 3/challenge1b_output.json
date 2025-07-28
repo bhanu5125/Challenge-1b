@@ -1,0 +1,77 @@
+{
+    "metadata": {
+        "input_documents": [
+            "Breakfast Ideas.pdf",
+            "Dinner Ideas - Mains_1.pdf",
+            "Dinner Ideas - Mains_2.pdf",
+            "Dinner Ideas - Mains_3.pdf",
+            "Dinner Ideas - Sides_1.pdf",
+            "Dinner Ideas - Sides_2.pdf",
+            "Dinner Ideas - Sides_3.pdf",
+            "Dinner Ideas - Sides_4.pdf",
+            "Lunch Ideas.pdf"
+        ],
+        "persona": "Food Contractor",
+        "job_to_be_done": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items.",
+        "processing_timestamp": "2025-07-28T20:48:31.497135"
+    },
+    "extracted_sections": [
+        {
+            "document": "Dinner Ideas - Sides_3.pdf",
+            "section_title": "Macaroni and Cheese",
+            "importance_rank": 1,
+            "page_number": 8
+        },
+        {
+            "document": "Dinner Ideas - Mains_3.pdf",
+            "section_title": "Vegetable Lasagna",
+            "importance_rank": 2,
+            "page_number": 8
+        },
+        {
+            "document": "Dinner Ideas - Sides_1.pdf",
+            "section_title": "Baba Ganoush",
+            "importance_rank": 3,
+            "page_number": 4
+        },
+        {
+            "document": "Dinner Ideas - Mains_1.pdf",
+            "section_title": "2 tablespoons vegetable oil",
+            "importance_rank": 4,
+            "page_number": 7
+        },
+        {
+            "document": "Dinner Ideas - Mains_1.pdf",
+            "section_title": "2 tablespoons vegetable oil",
+            "importance_rank": 5,
+            "page_number": 9
+        }
+    ],
+    "subsection_analysis": [
+        {
+            "document": "Dinner Ideas - Sides_3.pdf",
+            "refined_text": "Macaroni and Cheese  Ingredients : o   2 cups elbow macaroni o   2 cups milk o   2 tablespoons butter o   2 tablespoons flour o   2 cups shredded cheddar cheese o   1 teaspoon salt o   1/2 teaspoon pepper  Instructions : o   Cook macaroni according to package instructions, then drain. o   Melt butter in a saucepan, stir in flour to make a roux. o   Gradually add milk, stirring constantly until thickened. o   Add cheese, salt, and pepper, stir until melted. o   Combine cheese sauce with macaroni. o   Serve warm.  Manakish  Ingredients : o   2 1/4 teaspoons active dry yeast o   1 teaspoon sugar o   1 cup warm water o   3 cups flour o   1 teaspoon salt o   1/4 cup olive oil o   1/4 cup za'atar  Instructions : o   Dissolve yeast and sugar in warm water, let sit until foamy. o   Mix flour and salt in a bowl,",
+            "page_number": 8
+        },
+        {
+            "document": "Dinner Ideas - Mains_3.pdf",
+            "refined_text": "Vegetable Lasagna Ingredients:  9 lasagna noodles, cooked  1 small onion, diced  2 cloves garlic, minced  1 zucchini, sliced",
+            "page_number": 8
+        },
+        {
+            "document": "Dinner Ideas - Sides_1.pdf",
+            "refined_text": "Baba Ganoush  Ingredients : o   2 eggplants o   1/4 cup tahini o   1/4 cup lemon juice o   2 cloves garlic o   1/4 cup olive oil o   1 teaspoon salt  Instructions : o   Roast eggplants until soft, then peel and mash. o   Blend mashed eggplant, tahini, lemon juice, minced garlic, and salt in a food processor. o   Slowly add olive oil while blending until smooth. o   Serve with a drizzle of olive oil.  Baked Beans  Ingredients : o   4 cups cooked navy beans o   1 small onion o   1/2 cup molasses o   1/4 cup brown sugar o   1/4 cup ketchup o   1 tablespoon mustard o   1 teaspoon salt o   1/2 teaspoon pepper  Instructions : o   Preheat oven to 350°F (175°C). o   Sauté diced onion until translucent. o   Mix beans, onion, molasses, brown sugar, ketchup, mustard, salt, and pepper in a baking dish. o   Ba",
+            "page_number": 4
+        },
+        {
+            "document": "Dinner Ideas - Mains_1.pdf",
+            "refined_text": "2 tablespoons vegetable oil Instructions:  Soak rice noodles in warm water until softened, then drain.  Sauté shrimp or chicken in vegetable oil until cooked, then set aside.  Scramble eggs in the same pan.  Add noodles, fish sauce, tamarind paste, sugar, and lime juice, stir to combine.  Add bean sprouts, cooked shrimp or chicken, and chopped green onions.  Garnish with chopped peanuts and serve.    Beef Bourguignon Ingredients:  2 pounds beef chuck, cut into cubes  1 small onion, diced  2 cloves garlic, minced  1 cup red wine  2 cups beef broth  1 cup mushrooms, sliced  1 cup carrots, sliced  1 cup pearl onions  2 tablespoons tomato paste  2 tablespoons flour  2 tablespoons butter  1 teaspoon thyme  1 bay leaf  Salt and pepper to taste Instructions:  Preheat oven to 350°F (175°C).  In a large",
+            "page_number": 7
+        },
+        {
+            "document": "Dinner Ideas - Mains_1.pdf",
+            "refined_text": "2 tablespoons vegetable oil  Salt and pepper to taste  Chopped cilantro for garnish Instructions:  In a bowl, mix yogurt, lemon juice, minced garlic, grated ginger, cumin, coriander, turmeric, paprika, and garam masala.  Marinate chicken cubes in the mixture for at least 1 hour.  In a large skillet, heat vegetable oil over medium heat.  Cook diced onion until translucent.  Add marinated chicken and cook until browned.  Stir in diced tomatoes and simmer for 20 minutes.  Add heavy cream and simmer for an additional 10 minutes.  Season with salt and pepper to taste.  Garnish with chopped cilantro and serve.    Eggplant Parmesan Ingredients:",
+            "page_number": 9
+        }
+    ]
+}

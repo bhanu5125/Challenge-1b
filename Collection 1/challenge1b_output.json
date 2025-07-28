@@ -1,0 +1,75 @@
+{
+    "metadata": {
+        "input_documents": [
+            "South of France - Cities.pdf",
+            "South of France - Cuisine.pdf",
+            "South of France - History.pdf",
+            "South of France - Restaurants and Hotels.pdf",
+            "South of France - Things to Do.pdf",
+            "South of France - Tips and Tricks.pdf",
+            "South of France - Traditions and Culture.pdf"
+        ],
+        "persona": "Travel Planner",
+        "job_to_be_done": "Plan a trip of 4 days for a group of 10 college friends.",
+        "processing_timestamp": "2025-07-28T20:48:13.060133"
+    },
+    "extracted_sections": [
+        {
+            "document": "South of France - Restaurants and Hotels.pdf",
+            "section_title": "luxurious experiences, this guide will help you find the perfect restaurants and hotels for your",
+            "importance_rank": 1,
+            "page_number": 1
+        },
+        {
+            "document": "South of France - Cuisine.pdf",
+            "section_title": "Culinary Experiences",
+            "importance_rank": 2,
+            "page_number": 6
+        },
+        {
+            "document": "South of France - Tips and Tricks.pdf",
+            "section_title": "Packing for a trip to the South of France involves considering the season, planned activities,",
+            "importance_rank": 3,
+            "page_number": 9
+        },
+        {
+            "document": "South of France - Things to Do.pdf",
+            "section_title": "Water Activities",
+            "importance_rank": 4,
+            "page_number": 4
+        },
+        {
+            "document": "South of France - Things to Do.pdf",
+            "section_title": "take you through a variety of activities and must-see attractions to help you plan an",
+            "importance_rank": 5,
+            "page_number": 1
+        }
+    ],
+    "subsection_analysis": [
+        {
+            "document": "South of France - Restaurants and Hotels.pdf",
+            "refined_text": "luxurious experiences, this guide will help you find the perfect restaurants and hotels for your trip.",
+            "page_number": 1
+        },
+        {
+            "document": "South of France - Cuisine.pdf",
+            "refined_text": "Culinary Experiences In addition to dining at top restaurants, there are several culinary experiences you should consider: • Cooking Classes: Many towns and cities in the South of France oﬀer cooking classes where you can learn to prepare traditional dishes like bouillabaisse, ratatouille, and tarte tropézienne. These classes are a great way to immerse yourself in the local culture and gain hands-on experience with regional recipes. Some classes even include a visit to a local market to shop for fresh ingredients. • Food Markets: Visit local markets such as the Cours Saleya Market in Nice or the Marché Forville in Cannes to sample fresh produce, cheeses, and charcuterie. These markets are a feast for the senses, with stalls overflowing with colorful fruits and vegetables, fragrant herbs, and artisanal product",
+            "page_number": 6
+        },
+        {
+            "document": "South of France - Tips and Tricks.pdf",
+            "refined_text": "Packing for a trip to the South of France involves considering the season, planned activities, and the needs of both adults and children. By following this comprehensive guide and incorporating the tips and tricks provided, you'll be well-prepared for a comfortable and enjoyable trip. Remember to pack light, versatile clothing, and essential items to make the most of your travel experience. Bon voyage!",
+            "page_number": 9
+        },
+        {
+            "document": "South of France - Things to Do.pdf",
+            "refined_text": "Water Activities • Ardèche River : Paddle through the stunning Ardèche Gorge. • Dordogne River : Enjoy a leisurely canoe trip, passing by medieval castles and charming villages. • Ubaye River : Experience white-water rafting for an adrenaline rush. • Gorges du Verdon : Rent a kayak or paddleboat to explore the turquoise waters. • Lake Sainte-Croix : Enjoy swimming, sailing, and windsurfing on this beautiful lake. • Lake Serre-Ponçon : Try water skiing or wakeboarding on one of the largest artificial lakes in Europe. • Cévennes National Park : Go canyoning in the rugged terrain of this beautiful park.",
+            "page_number": 4
+        },
+        {
+            "document": "South of France - Things to Do.pdf",
+            "refined_text": "take you through a variety of activities and must-see attractions to help you plan an unforgettable trip.",
+            "page_number": 1
+        }
+    ]
+}

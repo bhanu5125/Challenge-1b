@@ -1,0 +1,83 @@
+{
+    "metadata": {
+        "input_documents": [
+            "Learn Acrobat - Create and Convert_1.pdf",
+            "Learn Acrobat - Create and Convert_2.pdf",
+            "Learn Acrobat - Edit_1.pdf",
+            "Learn Acrobat - Edit_2.pdf",
+            "Learn Acrobat - Export_1.pdf",
+            "Learn Acrobat - Export_2.pdf",
+            "Learn Acrobat - Fill and Sign.pdf",
+            "Learn Acrobat - Generative AI_1.pdf",
+            "Learn Acrobat - Generative AI_2.pdf",
+            "Learn Acrobat - Request e-signatures_1.pdf",
+            "Learn Acrobat - Request e-signatures_2.pdf",
+            "Learn Acrobat - Share_1.pdf",
+            "Learn Acrobat - Share_2.pdf",
+            "Test Your Acrobat Exporting Skills.pdf",
+            "The Ultimate PDF Sharing Checklist.pdf"
+        ],
+        "persona": "HR professional",
+        "job_to_be_done": "Create and manage fillable forms for onboarding and compliance.",
+        "processing_timestamp": "2025-07-28T20:48:19.333600"
+    },
+    "extracted_sections": [
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "section_title": "Change flat forms to fillable (Acrobat Pro)",
+            "importance_rank": 1,
+            "page_number": 12
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "section_title": "Fill and Sign PDF Forms",
+            "importance_rank": 2,
+            "page_number": 1
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "section_title": "Fill and sign PDF forms",
+            "importance_rank": 3,
+            "page_number": 2
+        },
+        {
+            "document": "Learn Acrobat - Export_1.pdf",
+            "section_title": "To control changes and quality trade-oﬀs, use  PDF Optimizer  in  Acrobat Pro , which makes",
+            "importance_rank": 4,
+            "page_number": 5
+        },
+        {
+            "document": "Learn Acrobat - Export_1.pdf",
+            "section_title": "1.   Open the PDF in Acrobat and select  Convert  from the top tools bar. Alternatively,",
+            "importance_rank": 5,
+            "page_number": 26
+        }
+    ],
+    "subsection_analysis": [
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "refined_text": "Change flat forms to fillable (Acrobat Pro) You can change a flat form to a fillable form by either using the  Prepare Form  tool or enabling the  Fill & Sign  tools. Acrobat and Acrobat Reader users can use the Fill & Sign tool to fill in flat forms. Interactive form To create an interactive form, use the  Prepare Forms  tool. See  Create a form from an existing document . Flat form To enable the  Fill & Sign  tools, from the hamburger menu ( File  menu in macOS) choose  Save As Other   >  Acrobat Reader Extended PDF  >  Enable More Tools (includes Form Fill-in & Save) . The tools are enabled for the current form only. When you create a different form, redo this task to enable Acrobat Reader users to use the tools.",
+            "page_number": 12
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "refined_text": "Fill and Sign PDF Forms You can easily fill, sign, and share your documents using Acrobat's Fill & Sign tool. Types of PDF forms",
+            "page_number": 1
+        },
+        {
+            "document": "Learn Acrobat - Fill and Sign.pdf",
+            "refined_text": "Fill and sign PDF forms To complete and sign PDF forms, open the form in Acrobat and then select  E-Sign  from the global bar. Alternatively, you can select  All tools  >   Fill & Sign . It displays the Fill & Sign tools in the left pane. You can now fill in the form fields and sign the form using the sign tools described in the following topics.  To fill text fields: 1.   From the left panel, select Fill in form fields , and then select the field where you want to add text. It displays a text field along with a toolbar. 2.   Select the text field again and enter your text. 3.   To reposition the text box to align it with the text field, select the textbox and hover over it. Once you see a plus icon with arrows, move the textbox to the desired position. 4.   To edit the text, select the text box. Once you see th",
+            "page_number": 2
+        },
+        {
+            "document": "Learn Acrobat - Export_1.pdf",
+            "refined_text": "To control changes and quality trade-oﬀs, use  PDF Optimizer  in  Acrobat Pro , which makes more options available. You can also easily convert from other file formats to PDF using our online tools such as  Word to PDF  and  Convert PDF . You can easily convert your PDF files into Microsoft Word (DOC or DOCX) using Adobe Acrobat.  Convert PDF to DOCX 1.   Open the PDF in Acrobat. 2.   From the global bar, select  Convert. 3.   From the left pane, Select  DOCX  from the drop-down menu next to  Microsoft Word . Then select  Convert to DOCX .",
+            "page_number": 5
+        },
+        {
+            "document": "Learn Acrobat - Export_1.pdf",
+            "refined_text": "1.   Open the PDF in Acrobat and select  Convert  from the top tools bar. Alternatively, from the  All tools  menu, select  Export a PDF . The various formats to which you can export the PDF file are displayed. 2.   From the  Convert  panel, select  image format  and then from the drop-down, select the desired image file format. 3.   Optional) To configure the conversion settings, select Settings and then modify the settings as required. Once done, select  OK . 4.   (Optional) To configure the image settings: 1.   Select  Export all Images  and then select Settings  2.   In the dialog that appears, specify the  File Settings ,  Color Management ,  Conversion , and  Extraction  settings for the file type. 3.   For  Exclude images smaller than , select the smallest size of the image to be extracted. Select No Limit to extract all images. 4.   Select  Ok . Note: If you do not se",
+            "page_number": 26
+        }
+    ]
+}
