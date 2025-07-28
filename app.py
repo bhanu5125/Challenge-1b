@@ -14,16 +14,41 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class Challenge1BCorrected:
-    def __init__(self):
-        """Initialize corrected Challenge 1B processor"""
+class PDFAnalyzer:
+    def __init__(self, model_dir: Path): 
         self.torch = torch
-        self.tokenizer = AutoTokenizer.from_pretrained("prajjwal1/bert-tiny")
-        self.model = AutoModel.from_pretrained("prajjwal1/bert-tiny")
+
+        bert_path = model_dir / "bert-tiny"
+        # --- CHANGED: Point to the new t5-small model directory ---
+        summarizer_path = model_dir / "t5-small"
+
+        if not bert_path.exists():
+            raise FileNotFoundError(
+                f"BERT model not found at '{bert_path}'. "
+                "Please run the download script first."
+            )
+            
+        logger.info(f"Loading BERT model from: {bert_path}")
+        self.tokenizer = AutoTokenizer.from_pretrained(bert_path)
+        self.model = AutoModel.from_pretrained(bert_path)
         
         try:
-            self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
-        except:
+            # --- CHANGED: Load the t5-small model ---
+            if summarizer_path.exists():
+                logger.info(f"Loading T5-small model from: {summarizer_path}")
+                self.summarizer = pipeline(
+                    "summarization", 
+                    model=summarizer_path, 
+                    tokenizer=summarizer_path
+                )
+            else:
+                logger.warning(
+                    f"Summarization model not found at '{summarizer_path}'. "
+                    "Summarizer will be disabled."
+                )
+                self.summarizer = None
+        except Exception as e:
+            logger.error(f"Failed to load summarizer pipeline: {e}")
             self.summarizer = None
         
         # Enhanced persona configurations
@@ -70,7 +95,7 @@ class Challenge1BCorrected:
             texts = [texts]
         
         inputs = self.tokenizer(texts, padding=True, truncation=True, 
-                               max_length=512, return_tensors="pt")
+                                max_length=512, return_tensors="pt")
         with self.torch.no_grad():
             outputs = self.model(**inputs)
         return outputs.last_hidden_state[:, 0, :].cpu().numpy()
@@ -85,14 +110,12 @@ class Challenge1BCorrected:
             return {}
 
     def is_valid_section_heading(self, text: str, line_info: Dict, body_size: float, 
-                                persona: str) -> bool:
+                                 persona: str) -> bool:
         """Enhanced section heading detection"""
-        # Length checks
         word_count = len(text.split())
         if word_count < 1 or word_count > 15 or len(text) < 3:
             return False
         
-        # Skip common non-headings
         skip_patterns = [
             r"^\d+$", r"^page \d+", r"^figure \d+", r"^table \d+",
             r"^copyright", r"^all rights reserved", r"^www\.", r"^http"
@@ -100,7 +123,6 @@ class Challenge1BCorrected:
         if any(re.search(pattern, text.lower()) for pattern in skip_patterns):
             return False
         
-        # Font-based detection
         spans = line_info.get("spans", [])
         if spans:
             font_size = spans[0].get("size", body_size)
@@ -109,13 +131,11 @@ class Challenge1BCorrected:
         else:
             is_bold = is_larger = False
         
-        # Persona-specific pattern matching
         persona_patterns = self.persona_config.get(persona, {}).get("section_patterns", [])
         matches_persona_pattern = any(
             re.search(pattern, text.lower()) for pattern in persona_patterns
         )
         
-        # General heading patterns
         general_patterns = [
             r"^[A-Z][a-z]+(?: [A-Z][a-z]+)*$",  # Title Case
             r"^\d+\.\s*[A-Z]",  # Numbered sections
@@ -126,7 +146,6 @@ class Challenge1BCorrected:
             re.search(pattern, text) for pattern in general_patterns
         )
         
-        # Decision logic
         if matches_persona_pattern:
             return True
         if (is_bold or is_larger) and (matches_general_pattern or word_count <= 8):
@@ -137,7 +156,7 @@ class Challenge1BCorrected:
         return False
 
     def extract_sections_from_pdf(self, pdf_path: Path, persona: str, 
-                                 job_description: str) -> List[Dict[str, Any]]:
+                                  job_description: str) -> List[Dict[str, Any]]:
         """Extract sections with improved heading detection"""
         try:
             doc = fitz.open(pdf_path)
@@ -148,7 +167,6 @@ class Challenge1BCorrected:
                 blocks = page.get_text("dict")["blocks"]
                 page_height = page.rect.height
                 
-                # Calculate font sizes
                 sizes = []
                 for block in blocks:
                     if "lines" not in block:
@@ -162,7 +180,6 @@ class Challenge1BCorrected:
                 
                 body_size = Counter(sizes).most_common(1)[0][0]
                 
-                # Extract sections
                 for block in blocks:
                     if "lines" not in block:
                         continue
@@ -171,7 +188,6 @@ class Challenge1BCorrected:
                         if not line["spans"]:
                             continue
                         
-                        # Skip header/footer
                         y_pos = line["spans"][0]["origin"][1]
                         if y_pos < page_height * 0.1 or y_pos > page_height * 0.9:
                             continue
@@ -198,17 +214,15 @@ class Challenge1BCorrected:
             return []
 
     def calculate_section_relevance(self, section_title: str, persona: str, 
-                                   job_description: str) -> float:
+                                    job_description: str) -> float:
         """Calculate relevance score for section"""
         if not section_title:
             return 0.0
         
-        # Embed texts
         title_embedding = self._embed_texts(section_title)[0]
         persona_embedding = self._embed_texts(persona)[0]
         job_embedding = self._embed_texts(job_description)[0]
         
-        # Calculate similarities
         persona_sim = np.dot(title_embedding, persona_embedding) / (
             np.linalg.norm(title_embedding) * np.linalg.norm(persona_embedding) + 1e-8
         )
@@ -216,13 +230,11 @@ class Challenge1BCorrected:
             np.linalg.norm(title_embedding) * np.linalg.norm(job_embedding) + 1e-8
         )
         
-        # Keyword matching
         persona_keywords = self.persona_config.get(persona, {}).get("keywords", [])
         title_lower = section_title.lower()
         keyword_matches = sum(1 for keyword in persona_keywords if keyword in title_lower)
         keyword_score = min(0.4, keyword_matches * 0.1)
         
-        # Pattern bonus
         persona_patterns = self.persona_config.get(persona, {}).get("section_patterns", [])
         pattern_bonus = 0.3 if any(re.search(pattern, title_lower) for pattern in persona_patterns) else 0
         
@@ -233,11 +245,9 @@ class Challenge1BCorrected:
         seen = set()
         deduped = []
         
-        # Sort by relevance first
         sections_sorted = sorted(sections, key=lambda x: x["relevance_score"], reverse=True)
         
         for section in sections_sorted:
-            # Create key for deduplication
             key = (
                 section["document"], 
                 section["section_title"].strip().lower(),
@@ -254,7 +264,7 @@ class Challenge1BCorrected:
         return deduped
 
     def extract_detailed_content(self, pdf_path: Path, section_title: str, 
-                               page_number: int, persona: str) -> str:
+                                 page_number: int, persona: str) -> str:
         """Extract comprehensive content for subsection analysis"""
         try:
             doc = fitz.open(pdf_path)
@@ -265,7 +275,6 @@ class Challenge1BCorrected:
             page = doc[page_number - 1]
             text_dict = page.get_text("dict")
             
-            # Extract all text from the page
             full_text = ""
             for block in text_dict["blocks"]:
                 if "lines" not in block:
@@ -277,18 +286,15 @@ class Challenge1BCorrected:
             
             doc.close()
             
-            # Find content around the section title
             full_text = full_text.strip()
             if not full_text:
                 return section_title
             
-            # Look for the section and extract surrounding content
             title_lower = section_title.lower()
             text_lower = full_text.lower()
             
             if title_lower in text_lower:
                 start_idx = text_lower.find(title_lower)
-                # Extract content after the title (next 500-800 characters)
                 content_start = start_idx + len(section_title)
                 content_end = min(len(full_text), content_start + 800)
                 detailed_content = full_text[content_start:content_end].strip()
@@ -296,7 +302,6 @@ class Challenge1BCorrected:
                 if detailed_content:
                     return f"{section_title} {detailed_content}"
             
-            # Fallback: return section title with some context
             return section_title
             
         except Exception as e:
@@ -305,17 +310,14 @@ class Challenge1BCorrected:
 
     def process_collection(self, input_file: Path, pdf_directory: Path) -> Dict[str, Any]:
         """Process collection with corrected logic"""
-        # Load configuration
         config = self.load_input_configuration(input_file)
         if not config:
             return {"error": "Failed to load input configuration"}
         
-        # Extract details
         documents = config.get("documents", [])
         persona = config.get("persona", {}).get("role", "Unknown")
         job_description = config.get("job_to_be_done", {}).get("task", "Unknown")
         
-        # Process documents
         all_sections = []
         processed_docs = []
         
@@ -340,14 +342,11 @@ class Challenge1BCorrected:
                 "subsection_analysis": []
             }
         
-        # Deduplicate and rank
         top_sections = self.deduplicate_sections(all_sections)
         
-        # Assign importance ranks
         for rank, section in enumerate(top_sections, 1):
             section["importance_rank"] = rank
         
-        # Generate subsection analysis
         subsection_analysis = []
         for section in top_sections:
             pdf_path = pdf_directory / section["document"]
@@ -382,23 +381,18 @@ class Challenge1BCorrected:
 
 def main():
     """Main execution function"""
-    INPUT_DIR = Path("")
-    OUTPUT_DIR = Path("")
+    BASE_DIR = Path(__file__).parent
+    MODEL_DIR = BASE_DIR / "models"
+    INPUT_DIR = BASE_DIR
     
-    if not INPUT_DIR.exists():
-        INPUT_DIR = Path("")
-        OUTPUT_DIR = Path("")
-    
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
-    processor = Challenge1BCorrected()
+    processor = PDFAnalyzer(model_dir=MODEL_DIR) 
     collections = ["Collection 1", "Collection 2", "Collection 3"]
     
     for collection_name in collections:
         collection_path = INPUT_DIR / collection_name
         input_file = collection_path / "challenge1b_input.json"
         pdf_directory = collection_path / "PDFs"
-        output_file = collection_path / f"challenge1b_output.json"
+        output_file = collection_path / f"challenge1b_output.json" 
         
         if input_file.exists() and pdf_directory.exists():
             print(f"📁 Processing {collection_name}...")
@@ -416,7 +410,10 @@ def main():
                     print(f"  ❌ Error: {result['error']}")
                     
             except Exception as e:
-                print(f"  ❌ Error: {e}")
+                print(f"  ❌ An unexpected error occurred: {e}")
+        else:
+            logger.warning(f"Skipping {collection_name}: input file or PDF directory not found.")
+
 
 if __name__ == "__main__":
     main()
